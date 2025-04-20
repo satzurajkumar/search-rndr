@@ -44,6 +44,7 @@ app = FastAPI(
 origins = [
     # add your cors origin address and portno here
     "https://satzurajkumar.github.io/demo-frontend-for-semantic-search/",
+    "https://search-rndr.onrender.com",
     "http://127.0.0.1:5500",
     "http://localhost:5500",
     
@@ -131,7 +132,7 @@ async def perform_semantic_search(search_request: SearchQuery):
 
     return SearchResponse(results=results)
 
-# --- Health Check Endpoint (Good Practice) ---
+# --- Health Check Endpoint  ---
 @app.get("/health")
 async def health_check():
     """Basic health check endpoint."""
