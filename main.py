@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field # Used for data validation and defining request/response models
 from sentence_transformers import SentenceTransformer, util # The core library for semantic search
@@ -138,6 +138,11 @@ async def health_check():
     # Check if model is loaded as a simple check
     model_loaded = model is not None
     return {"status": "ok", "model_loaded": model_loaded}
+
+@app.get('/')
+async def root(request: Request):
+    client_host = request.client.host
+    return { "status":"ok","message":"Hi, "+client_host}
 
 # --- Running the App (for local development) ---
 # If you run this script directly (python main.py), it won't start the server.
